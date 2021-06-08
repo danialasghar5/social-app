@@ -1,0 +1,12 @@
+<section id="app">
+  <div class="container">
+    <div class="row align-comment">
+      <div class="col-6">
+        <%= simple_form_for([ @post , @post.comments.build]) do |f| %>
+        <p><%= f.text_area :content, label: false, placeholder: 'Write a Comment', :class => "input" %><br/></p>
+          <%= f.button :submit, :class => "primaryContained" %>
+        <% end %>
+      </div><!-- End col -->
+    </div><!--End Row -->
+  </div><!--End Container -->
+</section><!-- end App -->

@@ -1,0 +1,20 @@
+<section id="app">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <div class="comment">
+          <% @post.comments.each do |comment| %>
+            <div class="single-comment mb-2">
+              <div class="mb-2"><%= comment.content%></div>
+              <% if user_signed_in? %>
+                <% if comment.user == current_user %>
+                    <%= link_to "Delete", post_comment_path(comment.post, comment) , method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn-custom-delete primaryContained' %>
+                <% end %>
+              <% end %>
+            </div><br>
+          <% end %>
+        </div><!--End Comment-->
+      </div><!--End col -->
+    </div><!-- End row -->
+  </div><!--End Container -->
+</section>

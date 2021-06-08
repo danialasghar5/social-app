@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="post-info">
+      <h2 class="post-title"><%= @post.title %> </h2>
+      <p class="post-description"> <%= @post.body %> </p>
+
+      <% if user_signed_in? %>
+        <% if @post.user == current_user %>
+        <div class="btn-group">
+          <%= link_to "Edit Post", edit_post_path(@post), class: "btn primaryContained" %>
+          <%= link_to "Delete Post", post_path(@post), method: :delete , data: {confirm: "Are you sure?"}, class: "btn primaryContained" %>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @post.image.attached? %>
+    <div class="col-md-4">
+      <img src="<%= (url_for(@post.image)) %>", class= "post-show">
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="comments">
+    <div id="commentParent">
+      <% if @post.comments.any? %>
+      <h2>Comments</h2>
+      <%= render "/comments/index" %>
+      <% else %>
+      <h5>No Comments!</h5>
+      <% end %>
+    </div>
+
+    <% if user_signed_in? %>
+      <h2>Add comment</h2>
+      <%= render "comments/new", post: @post%>
+    <% else %>
+      <p>You Are Required To Sign Up!</p>
+    <% end %>
+  </div>
+</div>
